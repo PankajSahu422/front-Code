@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider, appRouter } from "react-router-dom"
+import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import Navbar from "./components/shared/Navbar"
 import Login from "./components/auth/Login"
 import Signup from "./components/auth/Signup"
@@ -25,7 +25,7 @@ function App() {
 
   return (
     <div>
-     <RouterProvider router = {Router}/>
+     <RouterProvider router = {appRouter}/>
     </div>
   );
 }
