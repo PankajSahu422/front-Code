@@ -4,7 +4,7 @@ import Login from "./components/auth/Login"
 import Signup from "./components/auth/Signup"
 import  Home  from "./components/Home"
 
-
+function App() {
 
 const appRouter = createBrowserRouter([
   {
@@ -21,7 +21,7 @@ const appRouter = createBrowserRouter([
   },
   
 ])
-function App() {
+
 
   return (
     <div>
