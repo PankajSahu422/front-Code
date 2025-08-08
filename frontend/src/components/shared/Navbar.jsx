@@ -1,10 +1,12 @@
 import React from 'react'
 //import { Link, } from 'react-router-dom'
 import { Link } from 'react-router-dom'
+// >>>>>>> 605551f2a2f9de09ba287f3e4d31bda18947526f
 import { Popover, PopoverContent, PopoverTrigger } from '@radix-ui/react-popover'
 import { Avatar, AvatarImage } from '@radix-ui/react-avatar'
 import { Button } from '../ui/button'
 import { LogOut, User2 } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 const Navbar = () => {
   const user = false;
