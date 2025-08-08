@@ -17,7 +17,7 @@ const Signup = () => {
   });
 
   const changeEventHandler = (e) => {
-    setInput9({...input, [e.target.name]:e.target.value})
+    setInput({...input, [e.target.name]:e.target.value})
   }
   const changeFileHandler = (e) => {
     setInput({...input, file:e.files?.[0]});
@@ -25,6 +25,8 @@ const Signup = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    console.log(input);
+    
     
   }
   return (
@@ -46,7 +48,7 @@ const Signup = () => {
           <div className='my-2'>
             <Label>Email</Label>
             <Input
-              type="email"
+              type="text"
               value={input.email}
               name="email"
               onChange={changeEventHandler}
@@ -58,9 +60,9 @@ const Signup = () => {
             <Input
               type="number"
               value={input.phoneNumber}
-              name="phonenumber"
+              name="phoneNumber"
               onChange={changeEventHandler}
-              placeholder="1234567890"
+              placeholder="8080808080"
             />
           </div>
           <div className='my-2'>

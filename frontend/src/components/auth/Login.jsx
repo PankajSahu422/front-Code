@@ -14,7 +14,7 @@ const Login = () => {
   });
 
   const changeEventHandler = (e) => {
-    setInput9({ ...input, [e.target.name]: e.target.value })
+    setInput({ ...input, [e.target.name]: e.target.value })
   }
   const changeFileHandler = (e) => {
     setInput({ ...input, file: e.files?.[0] });
@@ -36,7 +36,7 @@ const Login = () => {
             <Input
               type="email"
               value={input.email}
-              name="email"
+              name="text"
               onChange={changeEventHandler}
               placeholder="Pankaj@gmail.com"
             />
@@ -74,7 +74,7 @@ const Login = () => {
                   onChange={changeEventHandler}
                   className='cursor-pointer'
                 />
-                <Label htmlFor="r2">Recuiter</Label>
+                <Label htmlFor="r2">Recruiter</Label>
               </div>
             </RadioGroup>
 
