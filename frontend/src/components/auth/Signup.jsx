@@ -4,30 +4,58 @@ import { Label } from '../ui/label'
 import { Input } from '../ui/input'
 import { RadioGroup } from '../ui/radio-group'
 import { Button } from '../ui/button'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import { toast } from 'sonner'
 
 const Signup = () => {
+  const [ loading, setLoading] = useState(false)
   const [input, setInput] = useState({
-    fullname:"",
-    email:"",
-    phoneNumber:"",
-    password:"",
-    role:"",
-    file:"",
+    fullname: "",
+    email: "",
+    phoneNumber: "",
+    password: "",
+    role: "",
+    file: "",
   });
+  const navigate = useNavigate();
 
   const changeEventHandler = (e) => {
-    setInput({...input, [e.target.name]:e.target.value})
+    setInput({ ...input, [e.target.name]: e.target.value })
   }
   const changeFileHandler = (e) => {
-    setInput({...input, file:e.files?.[0]});
+    setInput({ ...input, file: e.files?.[0] });
   }
 
   const submitHandler = async (e) => {
+    setLoading(true)
     e.preventDefault();
-    console.log(input);
-    
-    
+    const formData = new FormData();
+    formData.append("fullname", input.fullname);
+    formData.append("email", input.email);
+    formData.append("phoneNumber", input.phonenumber);
+    formData.append("password", input.password);
+    formData.append("role", input.role);
+    if (input.file) {
+      formData.append("file", input.file);
+    }
+    try {
+      const res = await axios.post(`${USER_API_END_POINT}/register`, formData, {
+        headers: {
+          "Content-Type": "multipart/form.data"
+        },
+        withCredentials: true,
+      });
+      if (res.data.success) {
+        navigate("/login");
+        toast.success(res.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.message);
+    }finally{
+      setLoading(false);
+    }
   }
   return (
     <div>
@@ -82,7 +110,7 @@ const Signup = () => {
                   type="radio"
                   name='role'
                   value="student"
-                  checked={input.role=== 'student'}
+                  checked={input.role === 'student'}
                   onChange={changeEventHandler}
                   className='cursor-pointer'
                 />
@@ -93,7 +121,7 @@ const Signup = () => {
                   type="radio"
                   name='role'
                   value="recruiter"
-                  checked={input.role=== 'recruiter'}
+                  checked={input.role === 'recruiter'}
                   onChange={changeEventHandler}
                   className='cursor-pointer'
                 />
@@ -110,8 +138,11 @@ const Signup = () => {
               />
             </div>
           </div>
-         <Button type="submit" className="w-full my-4 bg-black text-white">signup</Button>
-         <span className='text-sm'>Already have an account? <Link to="/login" className='text-blue-600'>Login</Link></span>
+                    {
+            loading ? <Button className='w-full my-4'><Loader2 className='mr-2 h-4 w-4 animate-spin' />Please wait</Button> :<Button type="submit" className="w-full my-4 ">Signup</Button>
+          }
+          <Button type="submit" className="w-full my-4 bg-black text-white">signup</Button>
+          <span className='text-sm'>Already have an account? <Link to="/login" className='text-blue-600'>Login</Link></span>
         </form>
       </div>
     </div>
